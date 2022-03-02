@@ -151,7 +151,7 @@ class _LoginScreenState extends State<LoginScreen> {
               padding: EdgeInsets.only(top: 20),
               child: RaisedButton(
                   color: Color.fromARGB(255, 229, 91, 44),
-                  child: Text("Submit", style: TextStyle(color: Colors.white)),
+                  child: Text("Login", style: TextStyle(color: Colors.white)),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30)),
                   onPressed: () {
