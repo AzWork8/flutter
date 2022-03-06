@@ -6,6 +6,7 @@ import 'authentication.dart';
 import './attendance_form.dart';
 import './attendance_list.dart';
 import './login.dart';
+import 'package:odoo_rpc/odoo_rpc.dart';
 
 // import 'package:flutter/services.dart';
 

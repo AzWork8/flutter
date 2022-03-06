@@ -93,8 +93,8 @@ class _AttendanceFormState extends State<AttendanceForm> {
               ),
               child: GoogleMap(
                 mapType: MapType.normal,
-                initialCameraPosition:
-                    CameraPosition(target: model.locationPosition),
+                initialCameraPosition: CameraPosition(
+                    target: LatLng(37.42796133580664, -122.085749655962)),
                 myLocationEnabled: true,
                 myLocationButtonEnabled: true,
                 onMapCreated: (GoogleMapController controller) {},

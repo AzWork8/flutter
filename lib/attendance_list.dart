@@ -74,6 +74,7 @@ class _HomePageState extends State<HomePage> {
                     Navigator.pushAndRemoveUntil(
                       context,
                       MaterialPageRoute(builder: (context) => AttendanceForm()),
+                      //MaterialPageRoute(builder: (context) => AttendanceForm()),
                       (Route<dynamic> route) => false,
                     );
                   },

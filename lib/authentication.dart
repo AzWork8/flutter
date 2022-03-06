@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:odoo_rpc/odoo_rpc.dart';
 
 var _username = ["username1"];
 var _password = ["password123"];
@@ -13,6 +14,7 @@ class Authentication {
         return true;
       }
     }
+
     return false;
   }
 }
