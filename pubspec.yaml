@@ -38,6 +38,13 @@ dependencies:
   provider:
   geolocator: ^8.0.1
   odoo_rpc: ^0.4.0-nullsafety.6
+  flutter_launcher_icons: ^0.9.2
+  camera: ^0.9.4+14
+
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/img/moonlinelogo.png"
 
 dev_dependencies:
   flutter_test:
@@ -61,8 +68,8 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
+  assets:
+    - assets/img/moonlineLogo.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

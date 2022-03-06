@@ -1,8 +1,10 @@
 import 'package:Login_ui/provider/location_provider.dart';
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
 import './attendance_list.dart';
+import 'camera_page.dart';
 import 'main.dart';
 import 'user_location.dart';
 
@@ -52,29 +54,6 @@ class _AttendanceFormState extends State<AttendanceForm> {
           ],
         ),
         body: googleMapUI());
-
-    // Container(
-    //   child: Column(
-    //     children: [
-    //       Expanded(
-    //           child: Container(
-    //         padding: EdgeInsets.fromLTRB(5, 5, 5, 300),
-    //         decoration: BoxDecoration(
-    //           border: Border.all(
-    //             color: Colors.black,
-    //             width: 1,
-    //           ),
-    //         ),
-    //         child: GoogleMap(
-    //           mapType: MapType.normal,
-    //           initialCameraPosition:
-    //               CameraPosition(target: LatLng(28.7041, 77.1025), zoom: 18),
-    //           onMapCreated: (GoogleMapController controller) {},
-    //         ),
-    //       ))
-    //     ],
-    //   ),
-    // ),
   }
 
   Widget googleMapUI() {
@@ -84,7 +63,7 @@ class _AttendanceFormState extends State<AttendanceForm> {
           children: [
             Expanded(
                 child: Container(
-              padding: EdgeInsets.fromLTRB(5, 5, 5, 300),
+              padding: EdgeInsets.fromLTRB(5, 5, 5, 200),
               decoration: BoxDecoration(
                 border: Border.all(
                   color: Colors.black,
@@ -94,12 +73,34 @@ class _AttendanceFormState extends State<AttendanceForm> {
               child: GoogleMap(
                 mapType: MapType.normal,
                 initialCameraPosition: CameraPosition(
-                    target: LatLng(37.42796133580664, -122.085749655962)),
+                    target: LatLng(36.184956, 43.961450), zoom: 24),
                 myLocationEnabled: true,
                 myLocationButtonEnabled: true,
                 onMapCreated: (GoogleMapController controller) {},
               ),
-            ))
+            )),
+            ElevatedButton(
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all<Color>(
+                  Color.fromARGB(255, 229, 91, 44),
+                ),
+              ),
+              child: Padding(
+                  padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
+                  child: Text('Add punch')),
+              onPressed: () async {
+                await availableCameras().then(
+                  (value) => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => CameraPage(
+                        cameras: value,
+                      ),
+                    ),
+                  ),
+                );
+              },
+            ),
           ],
         );
       }
