@@ -19,6 +19,8 @@ class AttendanceForm extends StatefulWidget {
 
 class _AttendanceFormState extends State<AttendanceForm> {
   Position userLivePoition;
+  GoogleMapController GmapController;
+
   @override
   void initState() {
 
@@ -80,7 +82,10 @@ class _AttendanceFormState extends State<AttendanceForm> {
                     target: LatLng(36.184956, 43.961450), zoom: 24),
                 myLocationEnabled: true,
                 myLocationButtonEnabled: true,
-                onMapCreated: (GoogleMapController controller) {},
+                onMapCreated: (GoogleMapController controller) {
+
+                  GmapController =controller;
+                },
               ),
             )),
             ElevatedButton(
@@ -109,6 +114,8 @@ class _AttendanceFormState extends State<AttendanceForm> {
 var locationResult = await _determinePosition();
 setState((){
 userLivePoition = locationResult;
+GmapController.animateCamera(CameraUpdate.newLatLngZoom(LatLng(locationResult.latitude, locationResult.longitude), 18));
+
 }
 
 
