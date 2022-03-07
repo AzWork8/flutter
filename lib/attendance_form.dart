@@ -20,6 +20,7 @@ class AttendanceForm extends StatefulWidget {
 class _AttendanceFormState extends State<AttendanceForm> {
   Position userLivePoition;
   GoogleMapController GmapController;
+    XFile? pictureFile;
 
   @override
   void initState() {
@@ -98,16 +99,16 @@ class _AttendanceFormState extends State<AttendanceForm> {
                   padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
                   child: Text('Add punch')),
               onPressed: () async {
-                // await availableCameras().then(
-                //   (value) => Navigator.push(
-                //     context,
-                //     MaterialPageRoute(
-                //       builder: (context) => CameraPage(
-                //         cameras: value,
-                //       ),
-                //     ),
-                //   ),
-                // );
+             pictureFile=  await availableCameras().then(
+                  (value) => Navigator.push(
+                    context,
+                   MaterialPageRoute(
+                      builder: (context) => CameraPage(
+                        cameras: value,
+                       ),
+                     ),
+                   ),
+                 );
 
 
                 // added 

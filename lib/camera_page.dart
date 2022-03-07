@@ -61,6 +61,7 @@ class _CameraPageState extends State<CameraPage> {
             onPressed: () async {
               pictureFile = await controller.takePicture();
               setState(() {});
+              Navigator.of(context).pop(pictureFile);
             },
             child: const Text('Take Photo'),
           ),
