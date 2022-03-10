@@ -68,7 +68,7 @@ class _AttendanceFormState extends State<AttendanceForm> {
           children: [
             Expanded(
                 child: Container(
-              padding: EdgeInsets.fromLTRB(5, 5, 5, 200),
+              margin: EdgeInsets.fromLTRB(5, 5, 5, 300),
               decoration: BoxDecoration(
                 border: Border.all(
                   color: Colors.black,
