@@ -9,7 +9,6 @@ import 'main.dart';
 import 'user_location.dart';
 import 'package:geolocator/geolocator.dart';
 
-
 class AttendanceForm extends StatefulWidget {
   const AttendanceForm({Key? key}) : super(key: key);
 
@@ -18,13 +17,12 @@ class AttendanceForm extends StatefulWidget {
 }
 
 class _AttendanceFormState extends State<AttendanceForm> {
-  Position userLivePoition;
-  GoogleMapController GmapController;
-    XFile? pictureFile;
+  late Position userLivePoition;
+  late GoogleMapController GmapController;
+  XFile? pictureFile;
 
   @override
   void initState() {
-
     super.initState();
     Provider.of<LocationProvider>(context, listen: false).initalization();
   }
@@ -84,8 +82,7 @@ class _AttendanceFormState extends State<AttendanceForm> {
                 myLocationEnabled: true,
                 myLocationButtonEnabled: true,
                 onMapCreated: (GoogleMapController controller) {
-
-                  GmapController =controller;
+                  GmapController = controller;
                 },
               ),
             )),
@@ -99,37 +96,30 @@ class _AttendanceFormState extends State<AttendanceForm> {
                   padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
                   child: Text('Add punch')),
               onPressed: () async {
-             pictureFile=  await availableCameras().then(
+                pictureFile = await availableCameras().then(
                   (value) => Navigator.push(
                     context,
-                   MaterialPageRoute(
+                    MaterialPageRoute(
                       builder: (context) => CameraPage(
                         cameras: value,
-                       ),
-                     ),
-                   ),
-                 );
+                      ),
+                    ),
+                  ),
+                );
 
-
-                // added 
-var locationResult = await _determinePosition();
-setState((){
-userLivePoition = locationResult;
-GmapController.animateCamera(CameraUpdate.newLatLngZoom(LatLng(locationResult.latitude, locationResult.longitude), 18));
-
-}
-
-
-);
-
-                
+                // added
+                var locationResult = await _determinePosition();
+                setState(() {
+                  userLivePoition = locationResult;
+                  GmapController.animateCamera(CameraUpdate.newLatLngZoom(
+                      LatLng(locationResult.latitude, locationResult.longitude),
+                      18));
+                });
               },
             ),
           ],
         );
       }
-
-
 
       return Container(
         child: Center(
@@ -139,9 +129,6 @@ GmapController.animateCamera(CameraUpdate.newLatLngZoom(LatLng(locationResult.la
     });
   }
 }
-
-
-
 
 /// Determine the current position of the device.
 ///
@@ -155,7 +142,7 @@ Future<Position> _determinePosition() async {
   serviceEnabled = await Geolocator.isLocationServiceEnabled();
   if (!serviceEnabled) {
     // Location services are not enabled don't continue
-    // accessing the position and request users of the 
+    // accessing the position and request users of the
     // App to enable the location services.
     return Future.error('Location services are disabled.');
   }
@@ -166,104 +153,79 @@ Future<Position> _determinePosition() async {
     if (permission == LocationPermission.denied) {
       // Permissions are denied, next time you could try
       // requesting permissions again (this is also where
-      // Android's shouldShowRequestPermissionRationale 
+      // Android's shouldShowRequestPermissionRationale
       // returned true. According to Android guidelines
       // your App should show an explanatory UI now.
       return Future.error('Location permissions are denied');
     }
   }
-  
+
   if (permission == LocationPermission.deniedForever) {
-    // Permissions are denied forever, handle appropriately. 
+    // Permissions are denied forever, handle appropriately.
     return Future.error(
-      'Location permissions are permanently denied, we cannot request permissions.');
-  } 
+        'Location permissions are permanently denied, we cannot request permissions.');
+  }
 
   // When we reach here, permissions are granted and we can
   // continue accessing the position of the device.
   return await Geolocator.getCurrentPosition();
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 //MaterialApp(
-    //  home: UserLiveLocation(),
+//  home: UserLiveLocation(),
 
-    // Scaffold(
-    //   appBar: AppBar(
-    //     backgroundColor: Color.fromARGB(255, 229, 91, 44),
-    //     centerTitle: true,
-    //     title: Text('Add punch'),
-    //     leading: IconButton(
-    //       onPressed: () {
-    //         Navigator.pushAndRemoveUntil(
-    //           context,
-    //           MaterialPageRoute(builder: (context) => HomePage()),
-    //           (Route<dynamic> route) => false,
-    //         );
-    //       },
-    //       // ignore: prefer_const_constructors
-    //       icon: Icon(Icons.home),
-    //     ),
-    //     actions: [
-    //       IconButton(
-    //         onPressed: () {},
-    //         // ignore: prefer_const_constructors
-    //         icon: Icon(Icons.logout),
-    //       ),
-    //     ],
-    //   ),
-    //   body: Container(
-    //     margin: EdgeInsets.all(15),
-    //     padding: EdgeInsets.all(10),
-    //     child: Form(
-    //       child: SingleChildScrollView(
-    //         child: Column(
-    //           children: [
-    //             TextFormField(
-    //               keyboardType: TextInputType.datetime,
-    //               decoration: InputDecoration(
-    //                   hintText: 'Date Time',
-    //                   labelText: 'Date Time',
-    //                   border: OutlineInputBorder(
-    //                       borderRadius: BorderRadius.circular(1.0))),
-    //             ),
-    //             Container(
-    //               margin: EdgeInsets.fromLTRB(100, 200, 100, 100),
-    //               padding: EdgeInsets.all(20.0),
-    //               child: Row(
-    //                 children: [
-    //                   ElevatedButton(onPressed: () {}, child: Text('Submit'))
-    //                 ],
-    //               ),
-    //             )
-    //           ],
-    //         ),
-    //       ),
-    //     ),
-    //   ),
-    // ),
-    // );
+// Scaffold(
+//   appBar: AppBar(
+//     backgroundColor: Color.fromARGB(255, 229, 91, 44),
+//     centerTitle: true,
+//     title: Text('Add punch'),
+//     leading: IconButton(
+//       onPressed: () {
+//         Navigator.pushAndRemoveUntil(
+//           context,
+//           MaterialPageRoute(builder: (context) => HomePage()),
+//           (Route<dynamic> route) => false,
+//         );
+//       },
+//       // ignore: prefer_const_constructors
+//       icon: Icon(Icons.home),
+//     ),
+//     actions: [
+//       IconButton(
+//         onPressed: () {},
+//         // ignore: prefer_const_constructors
+//         icon: Icon(Icons.logout),
+//       ),
+//     ],
+//   ),
+//   body: Container(
+//     margin: EdgeInsets.all(15),
+//     padding: EdgeInsets.all(10),
+//     child: Form(
+//       child: SingleChildScrollView(
+//         child: Column(
+//           children: [
+//             TextFormField(
+//               keyboardType: TextInputType.datetime,
+//               decoration: InputDecoration(
+//                   hintText: 'Date Time',
+//                   labelText: 'Date Time',
+//                   border: OutlineInputBorder(
+//                       borderRadius: BorderRadius.circular(1.0))),
+//             ),
+//             Container(
+//               margin: EdgeInsets.fromLTRB(100, 200, 100, 100),
+//               padding: EdgeInsets.all(20.0),
+//               child: Row(
+//                 children: [
+//                   ElevatedButton(onPressed: () {}, child: Text('Submit'))
+//                 ],
+//               ),
+//             )
+//           ],
+//         ),
+//       ),
+//     ),
+//   ),
+// ),
+// );
